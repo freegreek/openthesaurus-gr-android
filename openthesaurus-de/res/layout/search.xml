@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<EditText android:layout_height="wrap_content" android:hint="Suchwort"
+		android:id="@+id/etSearch" android:layout_below="@+id/ivLogo"
+		android:layout_width="fill_parent" android:layout_marginLeft="8dp"
+		android:layout_marginRight="8dp" android:layout_marginTop="8dp"
+		android:layout_marginBottom="2dp" android:layout_toRightOf="@+id/ibVoiceInput"
+		android:layout_toLeftOf="@+id/ibSubmit"></EditText>
+	<LinearLayout android:layout_below="@+id/etSearch"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:id="@+id/llSimilarTerms" android:layout_marginLeft="8dp"
+		android:layout_marginRight="8dp" android:layout_marginBottom="8dp">
+		<Button android:layout_height="wrap_content"
+			android:background="@drawable/button_blue_bg" android:layout_width="fill_parent"
+			android:layout_weight="1" android:id="@+id/btnSimilar1"
+			android:textColor="#ffffff" android:text="Similar 1"
+			android:ellipsize="end" android:visibility="gone" android:singleLine="true"></Button>
+		<Button android:layout_height="wrap_content"
+			android:background="@drawable/button_blue_bg" android:layout_width="fill_parent"
+			android:layout_weight="1" android:textColor="#ffffff" android:id="@+id/btnSimilar2"
+			android:text="Similar 2" android:ellipsize="end" android:visibility="gone"
+			android:singleLine="true"></Button>
+		<Button android:layout_height="wrap_content"
+			android:background="@drawable/button_blue_bg" android:layout_width="fill_parent"
+			android:layout_weight="1" android:textColor="#ffffff" android:id="@+id/btnSimilar3"
+			android:text="Similar 3" android:ellipsize="end" android:visibility="gone"
+			android:singleLine="true"></Button>
+		<Button android:layout_height="wrap_content"
+			android:background="@drawable/button_blue_bg" android:layout_width="fill_parent"
+			android:layout_weight="1" android:textColor="#ffffff" android:id="@+id/btnSimilar4"
+			android:text="Similar 4" android:ellipsize="end" android:visibility="gone"
+			android:singleLine="true"></Button>
+	</LinearLayout>
+	<ImageView android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:adjustViewBounds="true"
+		android:src="@drawable/logo" android:scaleType="fitXY" android:id="@+id/ivLogo"
+		android:layout_margin="8dp"></ImageView>
+	<ImageButton android:layout_below="@+id/ivLogo"
+		android:layout_height="wrap_content" android:id="@+id/ibSubmit"
+		android:layout_alignParentRight="true" android:layout_width="wrap_content"
+		android:background="@drawable/button_blue_bg" android:src="@drawable/arrow_right_16"
+		android:layout_marginRight="8dp" android:layout_marginTop="8dp"></ImageButton>
+	<ImageButton android:layout_below="@+id/ivLogo"
+		android:layout_height="wrap_content" android:id="@+id/ibVoiceInput"
+		android:layout_width="wrap_content" android:background="@drawable/button_blue_bg"
+		android:src="@drawable/mic" android:layout_marginTop="8dp"
+		android:layout_alignParentLeft="true" android:layout_marginLeft="8dp"></ImageButton>
+	<RelativeLayout android:layout_alignParentBottom="true"
+		android:background="#0079c6" android:layout_width="fill_parent"
+		android:layout_height="32dp" android:id="@+id/rlFooter">
+		<Button android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:background="@null"
+			android:id="@+id/btnAbout" android:textColor="#ffffff" android:text="Über"
+			android:layout_centerHorizontal="true" android:drawableLeft="@drawable/arrow_right"
+			android:drawablePadding="4dp" android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"></Button>
+		<Button android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:layout_below="@+id/tvDescription"
+			android:background="@null" android:id="@+id/btnTwitter"
+			android:textColor="#ffffff" android:text="Twitter"
+			android:layout_centerHorizontal="true" android:drawableLeft="@drawable/arrow_right"
+			android:drawablePadding="4dp" android:layout_alignParentBottom="true"
+			android:layout_toRightOf="@id/btnAbout" android:layout_marginLeft="32dp"></Button>
+	</RelativeLayout>
+	<ListView android:layout_centerHorizontal="true"
+		android:layout_height="fill_parent" android:layout_width="fill_parent"
+		android:id="@+id/lvResults" android:layout_above="@+id/rlFooter"
+		android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
+		android:layout_below="@id/llSimilarTerms"></ListView>
+
+</RelativeLayout>

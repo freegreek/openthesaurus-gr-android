@@ -1,0 +1,46 @@
+<LinearLayout android:id="@+id/LinearLayout01"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical">
+	<ScrollView android:id="@+id/ScrollView01"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_weight="1">
+		<LinearLayout android:id="@+id/LinearLayout02"
+			android:layout_height="wrap_content" android:orientation="vertical"
+			android:layout_width="fill_parent" android:gravity="center">
+			<ImageView android:src="@drawable/logo" android:scaleType="fitXY"
+				android:layout_height="wrap_content" android:layout_width="fill_parent"
+				android:adjustViewBounds="true" android:layout_margin="8dp"></ImageView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/app_name"
+				android:textAppearance="@android:style/TextAppearance.Large"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginLeft="24dip"
+				android:layout_marginRight="24dip" android:layout_marginTop="8dip"
+				android:layout_marginBottom="8dip"
+				android:text="OpenThesaurus ist eine interaktive Website zur Entwicklung eines deutschsprachigen Wörterbuchs für Synonyme. Man kann damit Wörter mit gleicher oder ähnlicher Bedeutung nachschlagen. Zum Beispiel liefert die Suche nach falsch unter anderem inkorrekt, unrichtig, verkehrt als Synonyme.
+\n\n
+Jeder kann bei OpenThesaurus mitmachen und Fehler korrigieren oder neue Synonyme einfügen. Die Suchfunktion zeigt alle Bedeutungen, in denen ein Wort vorkommt (z.B. roh -&gt; roh, ungekocht und einen anderen Eintrag für roh, rau, grob, unsanft). Bei den einzelnen Bedeutungen lassen sich dann unpassende Wörter löschen und neue hinzufügen. Findet die Suche keine Treffer, wird ein Link angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann."></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="Lizenz"
+				android:textAppearance="@android:style/TextAppearance.Large"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginLeft="24dip"
+				android:layout_marginRight="24dip" android:layout_marginTop="8dip"
+				android:layout_marginBottom="8dip"
+				android:text="Die Daten von OpenThesaurus stehen unter der GNU Lesser General Public License zur Verfügung."></TextView>
+			<ImageView android:src="@drawable/android"
+				android:layout_height="64dip" android:layout_width="64dip"
+				android:scaleType="fitXY"></ImageView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="Realisation"
+				android:textAppearance="@android:style/TextAppearance.Large"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="©2010 André Diermann"
+				android:layout_marginTop="8dip"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:autoLink="web" android:layout_height="wrap_content"
+				android:text="http://android.andrediermann.de"></TextView>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
