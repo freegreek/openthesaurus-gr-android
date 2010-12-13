@@ -8,7 +8,7 @@
 		android:layout_width="fill_parent" android:layout_marginLeft="8dp"
 		android:layout_marginRight="8dp" android:layout_marginTop="8dp"
 		android:layout_marginBottom="2dp" android:layout_toRightOf="@+id/ibVoiceInput"
-		android:layout_toLeftOf="@+id/ibSubmit"></EditText>
+		android:layout_toLeftOf="@+id/ibSubmit" android:imeOptions="actionSearch" android:inputType="text"></EditText>
 	<ImageView android:layout_height="wrap_content"
 		android:layout_width="fill_parent" android:adjustViewBounds="true"
 		android:src="@drawable/logo" android:scaleType="fitXY" android:id="@+id/ivLogo"

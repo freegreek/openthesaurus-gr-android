@@ -27,9 +27,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -53,6 +55,7 @@ public class SearchActivity extends Activity implements OnClickListener,
 	private ImageButton ibSubmit;
 	private ImageButton ibVoiceInput;
 	private ListView lvResults;
+	private View vLoad;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,22 @@ public class SearchActivity extends Activity implements OnClickListener,
 
 		etSearch = (EditText) findViewById(R.id.etSearch);
 		etSearch.setText(getIntent().getStringExtra("searchstring"));
+		etSearch
+				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+					@Override
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+							performSearch();
+							return true;
+						} else if (event != null
+								&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+							performSearch();
+							return true;
+						}
+						return false;
+					}
+				});
 
 		lvResults = (ListView) findViewById(R.id.lvResults);
 		lvResults.setOnItemClickListener(this);
@@ -92,6 +111,8 @@ public class SearchActivity extends Activity implements OnClickListener,
 
 		ibVoiceInput = (ImageButton) findViewById(R.id.ibVoiceInput);
 		ibVoiceInput.setOnClickListener(this);
+		
+		vLoad = findViewById(R.id.llLoad);
 
 		if (etSearch.getText().length() > 0)
 			new ThesaurusTask().execute(etSearch.getText().toString());
@@ -124,9 +145,7 @@ public class SearchActivity extends Activity implements OnClickListener,
 			startActivity(new Intent(this, TwitterActivity.class));
 			break;
 		case R.id.ibSubmit:
-			new ThesaurusTask().execute(etSearch.getText().toString());
-			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+			performSearch();
 			break;
 		case R.id.ibVoiceInput:
 			// Check to see if a recognition activity is present
@@ -170,9 +189,20 @@ public class SearchActivity extends Activity implements OnClickListener,
 		}
 	}
 
+	private void performSearch() {
+		new ThesaurusTask().execute(etSearch.getText().toString());
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+	}
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		String searchStr = ((TextView) arg1).getText().toString();
+		
+		//trim the search string
+		if(searchStr.contains(" "))
+			searchStr = searchStr.substring(0, searchStr.indexOf(" "));
+		
 		etSearch.setText(searchStr);
 		new ThesaurusTask().execute(searchStr);
 
@@ -181,6 +211,11 @@ public class SearchActivity extends Activity implements OnClickListener,
 	private class ThesaurusTask extends AsyncTask<String, Void, JSONObject> {
 		private final static String _url = "http://www.openthesaurus.de/synonyme/search?q=<query>&format=text/xml&similar=true&substring=true";
 
+		@Override
+		protected void onPreExecute() {
+			vLoad.setVisibility(View.VISIBLE);
+		}
+		
 		@Override
 		protected JSONObject doInBackground(String... params) {
 			String url = _url.replace("<query>", URLEncoder.encode(params[0]));
@@ -206,14 +241,14 @@ public class SearchActivity extends Activity implements OnClickListener,
 
 				String xml = writer.toString();
 
-				//need to encode german "umlaute"
+				// need to encode german "umlaute"
 				xml = xml.replace("&#xe4;", "Š");
 				xml = xml.replace("&#xf6;", "š");
 				xml = xml.replace("&#xfc;", "Ÿ");
 				xml = xml.replace("&#xc4;", "€");
 				xml = xml.replace("&#xd6;", "…");
 				xml = xml.replace("&#xdc;", "†");
-				xml = xml.replace("&#xdf;", "&");
+				xml = xml.replace("&#xdf;", "§");
 
 				return XML.toJSONObject(xml);
 			} catch (MalformedURLException e) {
@@ -232,6 +267,8 @@ public class SearchActivity extends Activity implements OnClickListener,
 
 		@Override
 		protected void onPostExecute(JSONObject result) {
+			vLoad.setVisibility(View.GONE);
+			
 			if (result != null) {
 				lvResults.setAdapter(new ResultListAdapter(result));
 

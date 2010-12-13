@@ -8,7 +8,8 @@
 		android:layout_width="fill_parent" android:layout_marginLeft="8dp"
 		android:layout_marginRight="8dp" android:layout_marginTop="8dp"
 		android:layout_marginBottom="2dp" android:layout_toRightOf="@+id/ibVoiceInput"
-		android:layout_toLeftOf="@+id/ibSubmit"></EditText>
+		android:layout_toLeftOf="@+id/ibSubmit" android:imeOptions="actionSearch"
+		android:maxLines="1"></EditText>
 	<LinearLayout android:layout_below="@+id/etSearch"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:id="@+id/llSimilarTerms" android:layout_marginLeft="8dp"
@@ -34,10 +35,9 @@
 			android:text="Similar 4" android:ellipsize="end" android:visibility="gone"
 			android:singleLine="true"></Button>
 	</LinearLayout>
-	<ImageView android:layout_height="wrap_content"
-		android:layout_width="fill_parent" android:adjustViewBounds="true"
+	<ImageView android:layout_width="fill_parent" android:adjustViewBounds="true"
 		android:src="@drawable/logo" android:scaleType="fitXY" android:id="@+id/ivLogo"
-		android:layout_margin="8dp"></ImageView>
+		android:layout_margin="8dp" android:layout_height="wrap_content" android:layout_toRightOf="@+id/ibVoiceInput" android:layout_toLeftOf="@+id/ibSubmit"></ImageView>
 	<ImageButton android:layout_below="@+id/ivLogo"
 		android:layout_height="wrap_content" android:id="@+id/ibSubmit"
 		android:layout_alignParentRight="true" android:layout_width="wrap_content"
@@ -70,5 +70,16 @@
 		android:id="@+id/lvResults" android:layout_above="@+id/rlFooter"
 		android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
 		android:layout_below="@id/llSimilarTerms"></ListView>
-
+	<LinearLayout android:id="@+id/llLoad"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_above="@+id/rlFooter" android:layout_marginLeft="8dp"
+		android:layout_marginRight="8dp" android:layout_below="@id/llSimilarTerms"
+		android:background="#DDFFFFFF" android:gravity="center"
+		android:orientation="vertical" android:visibility="gone">
+		<ProgressBar android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="Lade Daten..."
+			android:layout_marginTop="8dp" />
+	</LinearLayout>
 </RelativeLayout>
